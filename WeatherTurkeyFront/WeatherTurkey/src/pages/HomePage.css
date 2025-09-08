@@ -1,0 +1,304 @@
+.homepage-main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    /* Kenarlardan boşluk */
+    overflow: hidden;
+    /* Dışarıya taşmayı engeller */
+    min-height: 0;
+}
+
+.homepage-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.map-content {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* SVG HARİTANIN KENDİSİ */
+.turkey-map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.turkey-map path {
+    fill: #C7D2FE;
+    stroke: #ffffff;
+    stroke-width: 1.2;
+    transition: fill 0.2s ease-in-out, filter 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.turkey-map path:hover {
+    fill: #818CF8;
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+}
+
+/* --- Modal ve Diğer Stiller --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.modal-content {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    position: relative;
+    width: 320px;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: #F3F4F6;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #6B7280;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.close-button:hover {
+    background-color: #E5E7EB;
+    color: #1F272F;
+}
+
+.weather-details h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.weather-details img {
+    margin: -10px 0;
+}
+
+.temperature {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    color: #111827;
+}
+
+.description {
+    text-transform: capitalize;
+    font-size: 1.1rem;
+    color: #4B5563;
+    margin-top: -5px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.extra-details {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1rem;
+    border-top: 1px solid #F3F4F6;
+    margin-top: 1rem;
+}
+
+.extra-details span {
+    color: #4B5563;
+}
+
+.extra-details strong {
+    color: #111827;
+}
+
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(17, 24, 39, 0.85);
+    color: white;
+    padding: 1.25rem 1.75rem;
+    border-radius: 12px;
+    z-index: 1002;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.view-title {
+    text-align: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.view-subtitle {
+    font-size: 1.1rem;
+    color: #6B7280;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    /* İçinde bulunduğu alanı tamamen kapla */
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-grid {
+    flex-grow: 1;
+    /* Kalan tüm dikey alanı doldur */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Ekranı ikiye böl */
+    gap: 2rem;
+    margin-top: 1rem;
+    overflow: hidden;
+    /* İçerik taşmasını engelle */
+    min-height: 0;
+}
+
+.main-card,
+.region-cities-list {
+    background-color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    border: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-card {
+    align-items: center;
+    justify-content: center;
+}
+
+.card-subtitle {
+    margin: 0;
+    color: #6B7280;
+    font-weight: 500;
+}
+
+.card-title {
+    margin: 0.25rem 0 0;
+    font-size: 2.5rem;
+}
+
+.main-weather-icon {
+    width: 150px;
+    height: 150px;
+    margin: 0;
+}
+
+.main-temp {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.main-desc {
+    text-transform: capitalize;
+    font-size: 1.25rem;
+    color: #4B5563;
+    margin-top: -0.5rem;
+}
+
+.region-cities-list {
+    overflow: hidden;
+    /* İçindeki listenin taşmasını engeller */
+}
+
+.region-cities-list h4 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #E5E7EB;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    /* Başlığın küçülmesini engelle */
+}
+
+.region-cities-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* --- KAYDIRMA MANTIĞI BURADA --- */
+    overflow-y: auto;
+    /* Eğer içerik sığmazsa, SADECE BU ALANDA dikey kaydırma çubuğu çıkar */
+}
+
+.region-cities-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid #F3F4F6;
+    font-size: 1.1rem;
+}
+
+.region-cities-list li:last-child {
+    border-bottom: none;
+}
+
+.city-name {
+    font-weight: 500;
+    color: #374151;
+}
+
+.city-temp {
+    font-weight: 600;
+    color: #111827;
+    background-color: #F3F4F6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    min-width: 50px;
+    text-align: center;
+}

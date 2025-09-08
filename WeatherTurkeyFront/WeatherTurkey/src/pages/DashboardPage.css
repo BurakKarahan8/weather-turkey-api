@@ -1,0 +1,97 @@
+.dashboard-page-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Kartın yukarıda durması için */
+    padding: 3rem 2rem;
+    background-color: #F9FAFB;
+}
+
+.settings-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+}
+
+.settings-card h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #111827;
+}
+
+.settings-card p {
+    text-align: center;
+    color: #6B7280;
+    margin-top: 0;
+    margin-bottom: 2.5rem;
+}
+
+/* RegisterPage'den kopyalanan stiller */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #4F46E5;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background-color: #4338CA;
+}
+
+.message {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.message.error {
+    background-color: #FEE2E2;
+    color: #B91C1C;
+}
+
+.message.success {
+    background-color: #D1FAE5;
+    color: #065F46;
+}

@@ -1,0 +1,15 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  /* İçindeki sayfa component'lerinin düzgün yerleşmesi için */
+  flex-direction: column;
+  overflow-y: auto;
+  /* Sayfa içeriği sığmazsa scrollbar çıksın */
+}
