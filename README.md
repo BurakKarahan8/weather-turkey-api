@@ -1,74 +1,90 @@
-# WeatherTurkey API - İnteraktif Hava Durumu Portalı (Backend)
+# İnteraktif Hava Durumu Portalı
 
-Bu proje, kullanıcılara anlık ve kişiselleştirilmiş hava durumu verileri sunan dinamik bir web portalının **backend (API)** servisidir. Spring Boot, Spring Security ve PostgreSQL kullanılarak geliştirilmiştir.
+Bu proje, modern web teknolojileri kullanılarak geliştirilmiş, kullanıcılara anlık ve kişiselleştirilmiş hava durumu verileri sunan tam kapsamlı (full-stack) bir web uygulamasıdır. Proje, iki ana bölümden oluşmaktadır:
 
-Frontend projesine [buradan](https://github.com/SENIN_KULLANICI_ADIN/weather-turkey-frontend) ulaşabilirsiniz. *(Bu linki kendi frontend reponun linki ile değiştir)*
+*   **Backend (API):** Spring Boot ile geliştirilmiş, veritabanı işlemlerini, kullanıcı kimlik doğrulamasını ve OpenWeatherMap API'si ile iletişimi yöneten RESTful servis.
+*   **Frontend (UI):** React (Vite ile) kullanılarak geliştirilmiş, misafirler için interaktif bir harita ve kayıtlı kullanıcılar için kişiselleştirilmiş bir panel sunan dinamik bir kullanıcı arayüzü.
+
+---
 
 ## ✨ Temel Özellikler
 
 *   **Çift Taraflı Kullanıcı Deneyimi:**
-    *   **Misafir Kullanıcılar:** Kimlik doğrulaması olmadan, herkese açık endpoint'ler aracılığıyla Türkiye'deki tüm şehirlerin hava durumu verilerine erişebilirler.
-    *   **Kayıtlı Kullanıcılar:** Güvenli bir şekilde kaydolup giriş yapabilir ve kendi konumlarına özel, kişiselleştirilmiş bir hava durumu paneli (dashboard) görüntüleyebilirler.
-*   **Modern Güvenlik Altyapısı:**
-    *   **JWT (JSON Web Token):** "Stateless" kimlik doğrulama için endüstri standardı olan JWT kullanılmıştır.
-    *   **Spring Security:** Rol tabanlı yetkilendirme, şifre hash'leme (BCrypt) ve güvenli endpoint yönetimi için sağlam bir altyapı sunar.
-*   **Coğrafi Hiyerarşi:** Kullanıcılar kaydolurken seçtikleri şehre göre, ait oldukları coğrafi bölge otomatik olarak saptanır.
-*   **Merkezi Hata Yönetimi:** `@ControllerAdvice` ile uygulama genelindeki tüm hatalar yakalanır ve frontend'e standart, anlaşılır bir formatta hata mesajları döndürülür.
-*   **Veri Yükleme (Data Seeding):** Uygulama ilk kez çalıştığında, Türkiye'nin 7 coğrafi bölgesi ve 81 ili otomatik olarak veritabanına yüklenir.
+    *   **Misafir Modu:** Giriş yapmamış kullanıcılar, interaktif bir SVG Türkiye haritası üzerinden istedikleri ilin anlık hava durumunu görüntüleyebilir.
+    *   **Kullanıcı Modu:** Kayıtlı kullanıcılar, kendi seçtikleri şehre ve o şehrin ait olduğu coğrafi bölgeye özel, zengin içerikli bir "Dashboard" (Ana Panel) ile karşılanır.
+*   **Modern Güvenlik Altyapısı (Backend):**
+    *   **JWT (JSON Web Token):** Güvenli ve "stateless" (durumsuz) kimlik doğrulama.
+    *   **Spring Security:** Rol tabanlı yetkilendirme altyapısı, şifre hash'leme (BCrypt) ve merkezi güvenlik yapılandırması.
+*   **Dinamik ve İnteraktif Arayüz (Frontend):**
+    *   **React & Vite:** Hızlı ve modern bir geliştirme deneyimi.
+    *   **SVG Harita:** Harici kütüphanelere bağımlı olmayan, yüksek performanslı ve tamamen özelleştirilebilir bir harita.
+    *   **Dinamik Yönlendirme:** `react-router-dom` ile kullanıcı durumuna göre değişen, çok sayfalı bir uygulama yapısı.
+*   **Sağlam Altyapı:**
+    *   **PostgreSQL & Docker:** Güvenilir ve taşınabilir bir veritabanı altyapısı.
+    *   **Katmanlı Mimari:** Sürdürülebilir ve yönetilebilir bir kod tabanı.
+    *   **Merkezi Hata Yönetimi:** Backend'de `@ControllerAdvice` ile tutarlı hata cevapları.
 
 ## 🛠️ Kullanılan Teknolojiler
 
-*   **Java 17**
-*   **Spring Boot 3+**
-    *   Spring Web (RESTful API)
-    *   Spring Security (Kimlik Doğrulama & Yetkilendirme)
-    *   Spring Data JPA (Veritabanı İşlemleri)
-*   **PostgreSQL:** İlişkisel veritabanı
-*   **Docker:** Veritabanını container içinde çalıştırmak için
-*   **Lombok:** Kod tekrarını azaltmak için
-*   **Maven:** Bağımlılık yönetimi
-*   **jjwt:** JSON Web Token işlemleri için
+| Kategori | Teknoloji |
+| :--- | :--- |
+| **Backend** | Java 17, Spring Boot 3+, Spring Security, Spring Data JPA, jjwt |
+| **Frontend** | React 18+, Vite, JavaScript (ES6+), Axios, React Router |
+| **Veritabanı**| PostgreSQL 15 |
+| **Ortam** | Docker |
+| **Genel** | Maven, Node.js (npm), Lombok, Git & GitHub |
 
 ## 🚀 Kurulum ve Çalıştırma
 
-#### Ön Koşullar
+Bu projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyin.
+
+### Ön Koşullar
 *   Java JDK 17+
 *   Apache Maven
+*   Node.js 18+
 *   Docker Desktop
 
-#### 1. Veritabanını Başlatma
-Projenin bir PostgreSQL veritabanına ihtiyacı vardır. Aşağıdaki Docker komutu ile hızlıca bir veritabanı ayağa kaldırabilirsiniz:
+---
+
+### **1. Backend (API) Kurulumu**
+
+#### a) Veritabanını Başlatma
+Projenin bir PostgreSQL veritabanına ihtiyacı vardır. Projenin ana dizininde bir terminal açın ve aşağıdaki Docker komutunu çalıştırın:
 ```bash
-docker run --name weather-app-postgres -e POSTGRES_USER=burak -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=weatherdb -p 5434:5432 -d postgres:15
+docker run --name weather-app-postgres -e POSTGES_USER=burak -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=weatherdb -p 5434:5432 -d postgres:15
 ```
 
-#### 2. Ortam Değişkenlerini Ayarlama
-Bu proje, hassas verileri (API Anahtarı vb.) ortam değişkenleri aracılığıyla yönetir. Uygulamayı çalıştırmadan önce aşağıdaki değişkenleri tanımlamanız gerekmektedir:
+#### b) API Anahtarını Ayarlama
+Backend'in OpenWeatherMap'ten veri çekebilmesi için bir API anahtarına ihtiyacı vardır.
+1.  `WeatherTurkey-api/src/main/resources/application.yml` dosyasını açın.
+2.  `openweathermap.api.key` alanına kendi OpenWeatherMap API anahtarınızı girin.
+    *   **Not:** Bu projenin GitHub'a yüklenmiş halinde, bu anahtar güvenlik nedeniyle ortam değişkeni (`${OPENWEATHER_API_KEY:}`) olarak ayarlanmıştır. Yerel geliştirme için doğrudan dosyaya yazabilir veya IDE'nizin ortam değişkeni ayarlama özelliğini kullanabilirsiniz.
 
-*   `OPENWEATHER_API_KEY`: OpenWeatherMap'ten aldığınız API anahtarı.
+#### c) Backend'i Çalıştırma
+1.  `WeatherTurkey-api` klasörünün ana dizininde bir terminal açın.
+2.  Aşağıdaki Maven komutunu çalıştırın:
+    ```bash
+    mvn spring-boot:run
+    ```
+Backend sunucusu `http://localhost:8080` adresinde başlayacaktır.
 
-IntelliJ IDEA gibi bir IDE kullanıyorsanız, bu değişkenleri "Run/Debug Configurations" bölümünden kolayca ekleyebilirsiniz.
+---
 
-#### 3. Uygulamayı Başlatma
-Projeyi klonladıktan sonra, ana dizinde aşağıdaki Maven komutunu çalıştırın:
-```bash
-mvn spring-boot:run
-```
-Uygulama varsayılan olarak `http://localhost:8080` adresinde başlayacaktır.
+### **2. Frontend (UI) Kurulumu**
 
-## 📄 API Endpoint'leri
+#### a) Bağımlılıkları Yükleme
+1.  `WeatherTurkey-frontend` klasörünün ana dizininde bir terminal açın.
+2.  Gerekli tüm kütüphaneleri yüklemek için aşağıdaki komutu çalıştırın:
+    ```bash
+    npm install
+    ```
 
-### Public Endpoints (Herkese Açık)
-*   `GET /api/public/cities`: Tüm şehirlerin listesini döndürür.
-*   `GET /api/public/weather?city={cityName}`: Belirtilen şehrin hava durumunu döndürür.
-
-### Authentication Endpoints (Kimlik Doğrulama)
-*   `POST /api/auth/register`: Yeni bir kullanıcı kaydı oluşturur.
-*   `POST /api/auth/login`: Kullanıcı girişi yapar ve bir JWT döndürür.
-
-### Secure Endpoints (Kimlik Doğrulama Gerekli)
-*   `GET /api/dashboard`: Giriş yapmış kullanıcının kişiselleştirilmiş panel verilerini döndürür.
-*   `PUT /api/user/city`: Giriş yapmış kullanıcının kayıtlı olduğu şehri günceller.
+#### b) Frontend'i Çalıştırma
+1.  Aynı terminalde, geliştirme sunucusunu başlatmak için aşağıdaki komutu çalıştırın:
+    ```bash
+    npm run dev
+    ```
+Frontend uygulaması `http://localhost:5173` adresinde başlayacak ve tarayıcınızda otomatik olarak açılacaktır. Artık uygulamayı kullanmaya hazırsınız!
 
 ---
 *Bu proje, staj kapsamında eğitim amaçlı geliştirilmiştir.*
